@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Movement Detected!</title>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/cui-standard.min.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous" ></script>
+    <!-- <script src="../public/js/styleguide.js"></script> -->
+
+    <script src="https://code.s4d.io/widget-space/production/bundle.js"></script>
+
+</head>
+<body class="cui">
+    <div class="content content--alt" style = "text-align: center; display:grid;">
+        <div class="container-fluid" >
+            <div class="row">
+                <!-- Left Rail -->
+                <div class="col-xl-2"></div>
+
+
+                <!-- Middle Rail -->
+                <div class="col-xl-8">
+                    <div class="section">
+                        <div class="panel panel--loose panel--raised base-margin-bottom" >
+                            <h1 id="room"></h1>
+                            <div id="my-webex-widget">
+                            <img id="img" style="-webkit-user-select:none;margin:auto;" width="513" height="288" onerror="setInterval(reload_image, 2500)">
+                            <br><br>
+                            <button class="btn btn--large btn--success" id="call"><a style="color:white; text-decoration: none;" href="SIP:{{ sip_url }}">Call into Room!</a></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Rail -->
+                <div class="col-xl-2"></div>
+            </div>
+                </div>
+
+
+            <div class="panel panel--loose panel--raised base-margin-bottom"id="hello" style="display:none"></div>
+
+            </div>
+        </div >
+
+    </div>
+    <script>
+        var room = "{{ room }}";
+        document.getElementById("room").innerHTML = "Movement detected in " + room;
+        var img = document.getElementById("img");
+        img.src = "{{url_for('static', filename='img/snapshot.jpg')}}"
+
+        function reload_image() {
+            var img = document.getElementById("img");
+            img.src = "{{url_for('static', filename='img/snapshot.jpg')}}"
+        }
+
+        function ignore() {
+            window.open('', _self, '');
+            window.close();
+        }
+    </script>
+</body>
+</html>
